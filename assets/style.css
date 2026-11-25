@@ -1,0 +1,976 @@
+/* ==========================================================================
+   麻雀 配牌・複合シャンテン数 & 手役ルート診断シミュレータ 公式Webガイド
+   共通スタイルシート（完全オフライン・素のCSS）
+   ========================================================================== */
+
+:root {
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --surface-subtle: #f3f4f0;
+  --surface-tint: #eef5f1;
+  --surface-navy: #eef2f7;
+  --surface-warn: #fdf8ee;
+
+  --text: #1e293b;
+  --text-muted: #475569;
+  --text-soft: #64748b;
+
+  --accent: #1e4d3b;
+  --accent-hover: #15392b;
+  --navy: #1e3a5f;
+  --navy-hover: #162c49;
+  --warn-border: #b47d2a;
+
+  --border: #dde2dc;
+  --border-strong: #c5cec6;
+
+  --radius: 8px;
+  --radius-sm: 5px;
+  --max-width: 860px;
+
+  --font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo",
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  line-height: 1.8;
+  overflow-wrap: break-word;
+}
+
+/* ---------- リンク ---------- */
+a {
+  color: var(--navy);
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+}
+
+a:hover {
+  color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ---------- 共通ヘッダー ---------- */
+.site-header {
+  background-color: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.7rem 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+}
+
+.site-brand {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.site-brand:hover {
+  color: var(--navy);
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.25rem 0.35rem;
+}
+
+.site-nav a {
+  display: inline-block;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease, color 0.15s ease;
+  white-space: nowrap;
+}
+
+.site-nav a:hover {
+  background-color: var(--surface-subtle);
+  color: var(--text);
+}
+
+.site-nav a.active {
+  background-color: var(--surface-tint);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.site-nav a.nav-app {
+  background-color: var(--accent);
+  color: #ffffff;
+  font-weight: 600;
+  margin-left: 0.2rem;
+}
+
+.site-nav a.nav-app:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+}
+
+/* ---------- メインコンテナ ---------- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 2rem 1.25rem 3.5rem;
+}
+
+/* ---------- ページ見出し・パンくず ---------- */
+.breadcrumb {
+  font-size: 0.82rem;
+  color: var(--text-soft);
+  margin: 0 0 0.8rem;
+}
+
+.breadcrumb a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  text-decoration: underline;
+  color: var(--accent);
+}
+
+.book-label {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  background-color: var(--surface-tint);
+  border: 1px solid #c9dfd3;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  margin-bottom: 0.65rem;
+}
+
+.page-title {
+  font-size: 1.75rem;
+  line-height: 1.35;
+  margin: 0 0 0.75rem;
+  color: var(--text);
+  letter-spacing: 0.01em;
+}
+
+.page-lead {
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin: 0 0 1.75rem;
+}
+
+/* ---------- セクション見出し ---------- */
+h2 {
+  font-size: 1.32rem;
+  line-height: 1.4;
+  color: var(--navy);
+  margin: 2.5rem 0 0.9rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid var(--border);
+}
+
+h3 {
+  font-size: 1.08rem;
+  line-height: 1.45;
+  color: var(--accent);
+  margin: 1.75rem 0 0.6rem;
+}
+
+h4 {
+  font-size: 0.98rem;
+  line-height: 1.45;
+  color: var(--text);
+  margin: 1.25rem 0 0.4rem;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+ul,
+ol {
+  margin: 0 0 1.15rem;
+  padding-left: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.42rem;
+}
+
+li:last-child {
+  margin-bottom: 0;
+}
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 2.2rem 0;
+}
+
+/* ---------- インラインコード・キー表記 ---------- */
+code {
+  font-family: var(--font-mono);
+  font-size: 0.87em;
+  background-color: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.08rem 0.35rem;
+  color: var(--navy);
+}
+
+kbd {
+  font-family: var(--font-mono);
+  font-size: 0.82em;
+  background-color: var(--surface);
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  padding: 0.05rem 0.38rem;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.ui-label {
+  display: inline-block;
+  font-size: 0.9em;
+  font-weight: 600;
+  background-color: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 0.05rem 0.42rem;
+  color: var(--text);
+}
+
+/* ---------- ヒーロー（トップページ） ---------- */
+.hero {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+  margin-bottom: 1.75rem;
+}
+
+.hero-eyebrow {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin: 0 0 0.5rem;
+}
+
+.hero h1 {
+  font-size: 1.65rem;
+  line-height: 1.38;
+  margin: 0 0 0.9rem;
+  color: var(--text);
+}
+
+.hero-lead {
+  font-size: 0.98rem;
+  color: var(--text-muted);
+  margin: 0 0 1.4rem;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ---------- ボタン ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.72rem 1.35rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  line-height: 1.3;
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  color: #ffffff;
+}
+
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--navy);
+  border-color: var(--navy);
+}
+
+.btn-secondary:hover {
+  background-color: var(--surface-navy);
+  color: var(--navy-hover);
+}
+
+.btn-muted {
+  background-color: var(--surface-subtle);
+  color: var(--text-soft);
+  border-color: var(--border-strong);
+  cursor: default;
+  font-weight: 600;
+}
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1.5rem 0;
+}
+
+/* ---------- コールアウト・囲み枠 ---------- */
+.callout {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+  padding: 1.05rem 1.25rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.callout-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+}
+
+.callout p:last-child,
+.callout ul:last-child {
+  margin-bottom: 0;
+}
+
+.callout-navy {
+  background-color: var(--surface-navy);
+  border-color: #cbd7e6;
+  border-left-color: var(--navy);
+}
+
+.callout-navy .callout-title {
+  color: var(--navy);
+}
+
+.callout-warn {
+  background-color: var(--surface-warn);
+  border-color: #e8d8b7;
+  border-left-color: var(--warn-border);
+}
+
+.callout-warn .callout-title {
+  color: #8a5b14;
+}
+
+.callout-beginner {
+  background-color: var(--surface-subtle);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--text-soft);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0 0 2rem;
+}
+
+.callout-beginner .callout-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--text);
+  margin: 0 0 0.35rem;
+}
+
+.callout-beginner p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0 0 0.55rem;
+}
+
+.callout-beginner .beginner-link {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* ---------- 目次（TOC） ---------- */
+.toc {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+  margin: 0 0 2rem;
+}
+
+.toc-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  margin: 0 0 0.5rem;
+  letter-spacing: 0.03em;
+}
+
+.toc ol {
+  margin: 0;
+  padding-left: 1.35rem;
+  font-size: 0.92rem;
+}
+
+.toc li {
+  margin-bottom: 0.25rem;
+}
+
+.toc a {
+  text-decoration: none;
+}
+
+.toc a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- ガイドカード一覧（トップページ） ---------- */
+.section-heading {
+  font-size: 1.18rem;
+  color: var(--navy);
+  margin: 2rem 0 0.9rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 2px solid var(--border);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin: 0 0 2rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem 1.25rem;
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  background-color: #fcfdfb;
+  color: var(--text);
+}
+
+.card-num {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  margin-bottom: 0.3rem;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 0.45rem;
+  line-height: 1.4;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin: 0;
+  line-height: 1.65;
+}
+
+/* ---------- FULL版案内枠 ---------- */
+.full-box {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.4rem;
+  margin: 2rem 0 0;
+}
+
+.full-box-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin: 0 0 0.45rem;
+}
+
+.full-box p {
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  margin: 0 0 0.9rem;
+}
+
+/* ---------- テーブル ---------- */
+.table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin: 1rem 0 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background-color: var(--surface);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  min-width: 520px;
+}
+
+th,
+td {
+  padding: 0.68rem 0.85rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border);
+}
+
+tr:last-child td {
+  border-bottom: 0;
+}
+
+thead th {
+  background-color: var(--surface-subtle);
+  color: var(--navy);
+  font-weight: 700;
+  white-space: nowrap;
+  border-bottom: 2px solid var(--border-strong);
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fcfcfa;
+}
+
+.col-center {
+  text-align: center;
+  white-space: nowrap;
+}
+
+.col-nowrap {
+  white-space: nowrap;
+}
+
+/* 状態バッジ */
+.mark-yes {
+  display: inline-block;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.mark-no {
+  display: inline-block;
+  color: var(--text-soft);
+}
+
+.mark-part {
+  display: inline-block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--navy);
+  background-color: var(--surface-navy);
+  border-radius: 4px;
+  padding: 0.08rem 0.42rem;
+  white-space: nowrap;
+}
+
+.tag-full {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--navy);
+  background-color: var(--surface-navy);
+  border: 1px solid #c5d4e6;
+  border-radius: 4px;
+  padding: 0.05rem 0.38rem;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+.tag-free {
+  display: inline-block;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--accent);
+  background-color: var(--surface-tint);
+  border: 1px solid #c5ddd0;
+  border-radius: 4px;
+  padding: 0.05rem 0.38rem;
+  vertical-align: middle;
+  margin-left: 0.25rem;
+}
+
+/* ---------- 定義リスト・2カラム情報 ---------- */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.9rem;
+  margin: 1rem 0 1.4rem;
+}
+
+.info-box {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+}
+
+.info-box h3,
+.info-box h4 {
+  margin-top: 0;
+  margin-bottom: 0.45rem;
+}
+
+.info-box p:last-child,
+.info-box ul:last-child {
+  margin-bottom: 0;
+}
+
+/* ---------- ステップリスト ---------- */
+.step-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 1rem 0 1.5rem;
+  counter-reset: guide-step;
+}
+
+.step-list li {
+  position: relative;
+  counter-increment: guide-step;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem 1.1rem 0.9rem 3.2rem;
+  margin-bottom: 0.7rem;
+}
+
+.step-list li::before {
+  content: counter(guide-step);
+  position: absolute;
+  left: 0.95rem;
+  top: 0.92rem;
+  width: 1.65rem;
+  height: 1.65rem;
+  border-radius: 50%;
+  background-color: var(--accent);
+  color: #ffffff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ---------- 牌のサンプル表示（第0冊） ---------- */
+.tile-example {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  vertical-align: middle;
+  margin: 0.25rem 0;
+}
+
+.tile-chip {
+  display: inline-block;
+  padding: 0.14rem 0.48rem;
+  background-color: #ffffff;
+  border: 1px solid var(--border-strong);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ---------- 注釈テキスト ---------- */
+.note-text {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+}
+
+/* ---------- 前後ページャ ---------- */
+.pager {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.pager-link {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 240px;
+  max-width: 48%;
+  padding: 0.85rem 1.05rem;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  text-decoration: none;
+  color: var(--text);
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.pager-link:hover {
+  border-color: var(--accent);
+  background-color: #fcfdfb;
+  color: var(--text);
+}
+
+.pager-link.pager-next {
+  margin-left: auto;
+  text-align: right;
+}
+
+.pager-dir {
+  font-size: 0.78rem;
+  color: var(--text-soft);
+  margin-bottom: 0.2rem;
+}
+
+.pager-title {
+  font-size: 0.94rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+/* ---------- 共通フッター ---------- */
+.site-footer {
+  background-color: var(--surface);
+  border-top: 1px solid var(--border);
+  padding: 1.5rem 1.25rem;
+  margin-top: 2rem;
+}
+
+.footer-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  font-size: 0.84rem;
+  color: var(--text-muted);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.footer-credit {
+  margin: 0;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.footer-links {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1rem;
+}
+
+.footer-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  color: var(--accent);
+  text-decoration: underline;
+}
+
+/* ---------- レスポンシブ調整（スマホ幅 375px 対応） ---------- */
+@media (max-width: 640px) {
+  .header-inner {
+    padding: 0.65rem 0.9rem;
+    gap: 0.45rem;
+  }
+
+  .site-brand {
+    font-size: 0.9rem;
+  }
+
+  .site-nav {
+    width: 100%;
+    gap: 0.25rem;
+  }
+
+  .site-nav a {
+    font-size: 0.8rem;
+    padding: 0.28rem 0.5rem;
+  }
+
+  .site-nav a.nav-app {
+    margin-left: 0;
+  }
+
+  .container {
+    padding: 1.35rem 0.95rem 2.75rem;
+  }
+
+  .hero {
+    padding: 1.35rem 1.1rem;
+  }
+
+  .hero h1 {
+    font-size: 1.32rem;
+  }
+
+  .page-title {
+    font-size: 1.42rem;
+  }
+
+  h2 {
+    font-size: 1.18rem;
+    margin-top: 2rem;
+  }
+
+  .card-grid,
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pager-link {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+
+  .pager-link.pager-next {
+    text-align: left;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+/* ---------- プロンプトブロック・コピーボタン（第4冊） ---------- */
+.prompt-block {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin: 1rem 0 1.5rem;
+  overflow: hidden;
+}
+
+.prompt-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem 0.75rem;
+  padding: 0.6rem 0.9rem;
+  background-color: var(--surface-subtle);
+  border-bottom: 1px solid var(--border);
+}
+
+.prompt-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--navy);
+}
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.32rem 0.72rem;
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--accent);
+  background-color: var(--surface);
+  border: 1px solid var(--accent);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.copy-btn:hover {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.copy-btn.copied {
+  background-color: var(--accent);
+  color: #ffffff;
+}
+
+.prompt-block pre {
+  margin: 0;
+  padding: 1rem 1.05rem;
+  overflow-x: auto;
+  background-color: #fcfcfa;
+  font-family: var(--font-mono);
+  font-size: 0.84rem;
+  line-height: 1.65;
+  color: var(--text);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.prompt-block pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+}

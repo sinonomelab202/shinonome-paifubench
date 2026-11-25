@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第2冊：ツールの基本説明書｜東雲牌譜ベンチ</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="../index.html">東雲牌譜ベンチ</a>
+      <nav class="site-nav" aria-label="サイトナビゲーション">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html" class="active" aria-current="page">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" class="nav-app" target="_blank" rel="noopener">無料版をひらく</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb"><a href="../index.html">トップ</a> / 第2冊：ツールの基本説明書</p>
+    <span class="book-label">第2冊</span>
+    <h1 class="page-title">ツールの基本説明書</h1>
+    <p class="page-lead">
+      全機能の一覧（FREE / FULL 対応比較）と、操作で迷いやすいポイント・目玉機能の実践的な使い方をまとめたリファレンスです。
+    </p>
+
+    <nav class="toc" aria-label="目次">
+      <p class="toc-title">この冊子の目次</p>
+      <ol>
+        <li><a href="#sec-1">はじめに：まず試す2つのこと ＆ できること・できないこと</a></li>
+        <li><a href="#sec-2">画面構成と全機能一覧（FREE / FULL 対応表）</a></li>
+        <li><a href="#sec-3">つまずきやすい点と目玉機能の重点解説</a></li>
+      </ol>
+    </nav>
+
+    <!-- ============================================================ -->
+    <section id="sec-1">
+      <h2>1. はじめに：まず試す2つのこと ＆ できること・できないこと</h2>
+
+      <h3>まず試す2つのこと</h3>
+      <ol class="step-list">
+        <li>
+          <strong>1局打ち切る</strong><br>
+          アプリを開いた初回から、他家3席では内蔵線形AI（<code>Lv.2 手なり</code>）が自動稼働しています。自分の手番で切る牌を選んでいくだけで、そのまま1局を進行・完結できます。終局時には「次の局へ」「<span class="ui-label">🔁 同じ山でやり直す</span>」「<span class="ui-label">🎲 別ツモで打ち直す（IF）</span> <span class="tag-full">FULL</span>」からすぐ次の検討へ移れます。
+        </li>
+        <li>
+          <strong>共有URLを開く</strong><br>
+          <code>#ST317-</code>（局面・牌譜の観戦）や <code>#QZ1-</code>（何切る出題・1打回答）のハッシュ付きURLをブラウザで開くだけで、該当局面が直接立ち上がり、そのまま再生・回答できます。
+        </li>
+      </ol>
+
+      <h3>できること・できないこと</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>動作方式（エアギャップ方式）</h4>
+          <p>
+            ブラウザ単体で完結して動作するローカル完結設計です。<strong>対人オンライン通信やサーバーへの盤面送信はありません</strong>（FULL版で外部LLM／ローカルLLM接続を明示的に有効にした場合のみ、ユーザー自身が設定した接続先へ通信します）。
+          </p>
+        </div>
+        <div class="info-box">
+          <h4>非対応の範囲</h4>
+          <p>
+            四人打ち標準ルールを対象としています。<strong>三人麻雀（三麻）</strong>、<strong>特殊ローカル役</strong>、および <strong>途中流局の自動処理</strong>（九種九牌・四風連打・四槓散了・四家立直・三家和など）には対応していません。
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-2">
+      <h2>2. 画面構成と全機能一覧（FREE / FULL 対応表）</h2>
+      <p>
+        無料Web版（FREE）の上部窓口は、観戦・単局練習・静的解析に絞った <strong><span class="ui-label">📂 局面をひらく</span> / <span class="ui-label">❓ 解説</span> の2窓口構成</strong> です。完全版（FULL）では <span class="ui-label">🛠️ つくる・直す</span> / <span class="ui-label">📂 牌譜・保存</span> / <span class="ui-label">🤖 相手AI</span> / <span class="ui-label">❓ 解説</span> の4窓口がすべて揃います。
+      </p>
+
+      <!-- 窓口① -->
+      <h3>窓口①：プレイ卓 ＆ 静的解析</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>機能</th>
+              <th>内容・仕様</th>
+              <th class="col-center">FREE</th>
+              <th class="col-center">FULL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>単局練習</strong></td>
+              <td>配牌から終局まで1局を打ち切る基本練習。<br><span class="note-text">※FREE の URL 起動時は観戦・回答を優先するため「🆕 単局配牌」「🔁 同山」を一時非表示。</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>東風戦／半荘戦</strong></td>
+              <td>複数局を通した点棒推移・オーラス条件戦の対局練習。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>URL起動（観戦・何切る回答）</strong></td>
+              <td><code>#ST317-</code> による局面観戦・検討、および <code>#QZ1-</code> による何切る回答＆1打採点。</td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>静的解析一式（基本＆深層）</strong></td>
+              <td>全28役複合向聴数、狙い目手役 ΔS、受入上位、3色ハイライト、日本語理由バッジ、押し引きメーター、守備安全度、他家オープン時の「見かけ残り vs 実山・他家保持」二段分離表示。</td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>単純リプレイ</strong></td>
+              <td><span class="ui-label">⏮ 先頭</span> / <span class="ui-label">↩ 戻す</span> / <span class="ui-label">▶ 再生</span> / <span class="ui-label">↪ 1手進む</span> / <span class="ui-label">⏭ 最新</span>、自動再生、任意巡目からの分岐打ち直し。ショートカット（<kbd>←</kbd> / <kbd>→</kbd> / <kbd>Z</kbd> / <kbd>Shift</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>・<kbd>Cmd</kbd>+<kbd>Y</kbd>）対応。</td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>一局IF反復</strong></td>
+              <td>同一配牌・同一巡目から山（ツモ順）だけを差し替えて打ち直し、選択の再現性を検証。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>視認・手触り設定（🎨 表示・音）</strong></td>
+              <td>同種牌ハイライト、点数⇔点差ワンクリック切替、河のツモ切り3値表示、他家打牌リズム、卓色8種・牌面デザイン4種・牌背色4種・文字サイズ・手牌表示・画面型・自動理牌・自動ツモテンポ。</td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 窓口② -->
+      <h3>窓口②：🛠️ つくる・直す</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>機能</th>
+              <th>内容・仕様</th>
+              <th class="col-center">FREE</th>
+              <th class="col-center">FULL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>盤面・ルール編集</strong></td>
+              <td>手牌・河・鳴き・ドラ・場風・自風・持ち点・ルール条件を自由に編集して任意局面を作成。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>不完全情報局面の作成・編集</strong></td>
+              <td>他家手牌が未確定な局面をそのまま作成・編集。<br><span class="note-text">※テキスト読込・自動補充再生自体は FREE でも動作。</span></td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>何切る出題リンク作成（<code>QZ1-</code>）</strong></td>
+              <td>正解・解説・ネタバレ防止を組み込んだ1打回答用の共有URLを生成。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 窓口③ -->
+      <h3>窓口③：📂 牌譜・保存（FREEでは「📂 局面をひらく」）</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>機能</th>
+              <th>内容・仕様</th>
+              <th class="col-center">FREE</th>
+              <th class="col-center">FULL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>コード貼付で読込</strong></td>
+              <td>タブ <span class="ui-label">📋 コード貼付で読込（単局・複数局）</span> → <span class="ui-label">📥 盤面に読み込む</span>。単局貼付・サンプル挿入・画像変換AIプロンプトコピーは共通。複数局 <code>.txt</code> バッチ読込・事前チェックは FULL 専用。</td>
+              <td class="col-center"><span class="mark-part">単局可</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>ローカル保存庫</strong></td>
+              <td>タブ <span class="ui-label">📚 保存済み牌譜（開く・保存）</span> → <span class="ui-label">💾 検閲して保存</span>、およびオートセーブ復元。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>JSONバックアップ</strong></td>
+              <td>ローカル保存庫データの一括エクスポート／インポート。<span class="note-text">（※実機最終点検中）</span></td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>裏方マクロ配管</strong></td>
+              <td>コマンド一括実行インターフェース <code>mjsim.command-batch.v1</code>。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 窓口④ -->
+      <h3>窓口④：🤖 相手AI ＆ ❓ 解説</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>機能</th>
+              <th>内容・仕様</th>
+              <th class="col-center">FREE</th>
+              <th class="col-center">FULL</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>内蔵AI本体</strong></td>
+              <td>単局標準で <span class="ui-label">🧠 Lv.2 手なり</span> が固定稼働。<code>ST317-</code> 内の Mode 0 / Mode 1 指定の再現にも対応。</td>
+              <td class="col-center"><span class="mark-part">○ (Lv.2固定)</span></td>
+              <td class="col-center"><span class="mark-part">○ (全段階可)</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>相手AI詳細設定・切替</strong></td>
+              <td>Mode 0 / 全ツッパ Lv.1 / Lv.2 手なり / Lv.2 点差の切替、立直・和了方針、思考ログ。卓上席バッジのダブルクリックによる内蔵AI 4段階順繰り切替<span class="note-text">（※Mode 2 は解除のみ）</span>。</td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>外部LLM／ローカルLLM連携</strong></td>
+              <td>Mode 2・<code>opponentRead</code> / <code>reason</code> 出力・セカンドオピニオン・コマンドバー。<span class="note-text">（※実機最終点検中）</span></td>
+              <td class="col-center"><span class="mark-no">×</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>解説・規約・FAQ</strong></td>
+              <td><span class="ui-label">❓ 解説</span> およびフッターから開く使い方・規約/FAQ・Spec v1.2 簡易案内。<br><span class="note-text">※詳細仕様は<a href="../04-lab/index.html">第4冊</a>参照。</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-3">
+      <h2>3. つまずきやすい点と目玉機能の重点解説</h2>
+
+      <h3>3-1. 「戻す・やり直す・保存」の4つの違い</h3>
+      <p>
+        似た役割に見える4つの操作は、「どこまで戻るか」「山を変えるか」「記録を残すか」がそれぞれ異なります。目的に合わせて使い分けてください。
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>操作・ボタン表記</th>
+              <th>置かれている場所</th>
+              <th>挙動と使いどころ</th>
+              <th class="col-center">対応版</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="ui-label">↩ 1手戻す</span><br><span class="note-text">（リプレイバー側は <code>↩ 戻す</code>）</span></td>
+              <td>手牌のすぐ下（手番アクションバー左側）／リプレイバー</td>
+              <td>直前の手番へ1手戻します。誤クリックのやり直しや、直前の巡目から別の打牌へ分岐させたいときに使います。</td>
+              <td class="col-center"><span class="tag-free">FREE</span> <span class="tag-full">FULL</span></td>
+            </tr>
+            <tr>
+              <td><span class="ui-label">🔁 同山</span><br><span class="note-text">（終局画面は <code>🔁 同じ山でやり直す</code>）</span></td>
+              <td>卓の上部バー／終局画面・終局バー</td>
+              <td><strong>配牌もツモ山もまったく同じ状態</strong>で、その局の最初からやり直します。「あの巡目で別の牌を切っていたら同じ山でどうなったか」を比較したいときに使います。</td>
+              <td class="col-center"><span class="tag-free">FREE</span> <span class="tag-full">FULL</span></td>
+            </tr>
+            <tr>
+              <td><span class="ui-label">🎲 IF別ツモ</span><br><span class="note-text">（終局画面は <code>🎲 別ツモで打ち直す（IF）</code>、パネル内実行は <code>🔀 別ツモで再挑戦</code>）</span></td>
+              <td>卓の上部バー／IFパネル／終局画面</td>
+              <td>配牌（または指定局面）を保ったまま、<strong>ツモ山だけを別の並びに入れ替えて再挑戦</strong>します。1回限りの引きの善し悪し（N=1）に左右されず、選択の再現性を確かめるときに使います。</td>
+              <td class="col-center"><span class="tag-full">FULL</span></td>
+            </tr>
+            <tr>
+              <td><span class="ui-label">📚 保存済み牌譜（開く・保存）</span> → <span class="ui-label">💾 検閲して保存</span></td>
+              <td><span class="ui-label">📂 牌譜・保存</span></td>
+              <td>現在の牌譜や局面をブラウザ内のローカル保存庫へ明示的に記録します。後日もう一度振り返りたい局を手元にストックするときに使います。</td>
+              <td class="col-center"><span class="tag-full">FULL</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout-title">オートセーブについて（FULL）</p>
+        <p>
+          手動の「保存」とは別に、FULL版では <strong>オートセーブが裏側で自動稼働</strong> しています。誤ってタブを閉じたり再読み込みしたりしても、次回起動時に直前の進行状態を復元できます。
+        </p>
+      </div>
+
+      <h3>3-2. 共有URL・テキストコード・JSONファイルの使い分け</h3>
+      <ul>
+        <li>
+          <strong>共有URL（<code>#ST317-</code> / <code>#QZ1-</code>）</strong>：SNS・チャット・メモからワンクリックで1局や何切る問題を開くための形式です。ブラウザやサービスのURL長制限による破損を防ぐため <strong>2,000字ガード</strong> が備わっています。
+        </li>
+        <li>
+          <strong>テキストコード（Spec v1.2）</strong>：<strong>1局＝1行の <code>|</code> 区切り形式</strong> です。人間の目で中身を確認・手直ししやすく、AIとのやり取りや、複数局をまとめた <code>.txt</code> ファイルのバッチ読込（FULL）に適しています。
+        </li>
+        <li>
+          <strong>JSONファイル（FULL）</strong>：ローカル保存庫に蓄積した複数局のデータをまとめてバックアップしたり、別端末へ丸ごと移行したりするための形式です（※実機最終点検中）。
+        </li>
+      </ul>
+
+      <h3>3-3. 【目玉】一局IF反復の使い方 <span class="tag-full">FULL</span></h3>
+      <p>
+        「良い選択をしたのに放銃してしまった」「強引に押してアガれたが本当に正着だったのか？」といった N=1 の結果論を解きほぐすのが <strong>一局IF反復</strong> です。
+      </p>
+      <ul>
+        <li><span class="ui-label">🔁 同山</span> で「同じツモ順での別ルート」を確認したあと、<span class="ui-label">🎲 IF別ツモ</span>（パネル内 <span class="ui-label">🔀 別ツモで再挑戦</span>／終局画面 <span class="ui-label">🎲 別ツモで打ち直す（IF）</span>）でツモ山を差し替えて複数回打ち直します。</li>
+        <li>同じ局面を何通りものツモ展開で繰り返すことで、「たまたま裏目を引いただけなのか、構造的に無理があったのか」を自分の手で確かめられます。</li>
+      </ul>
+
+      <h3>3-4. 【目玉】盤面エディタとネタバレ防止の何切る出題 <span class="tag-full">FULL</span></h3>
+      <p>
+        <span class="ui-label">🛠️ つくる・直す</span> では、自分の実戦の気になる1局面や、教材用の問題局面を一から組み立てることができます。
+      </p>
+      <ul>
+        <li>手牌・河・鳴き・ドラ・点数・ルール条件を自由に編集できるほか、他家の手牌が伏せられた <strong>不完全情報局面</strong> もそのまま作成できます（足りない牌は再生時に自動補充されます）。</li>
+        <li>仕上げに <strong>何切る出題リンク（<code>#QZ1-</code>）</strong> を書き出せば、相手へURLを渡すだけで出題完了です。受け取った側（FREE版でも回答可能）には正解やネタバレ情報が隠された状態で提示され、1打選んで回答したタイミングで採点と解説が開示されます。</li>
+      </ul>
+
+      <h3>3-5. 【目玉】相手AI切替・外部LLM／ローカルLLM接続とセカンドオピニオン <span class="tag-full">FULL</span></h3>
+      <p>
+        <span class="ui-label">🤖 相手AI</span> では、他家3席の思考モデルを練習目的に合わせて柔軟に切り替えられます。
+      </p>
+      <ul>
+        <li>
+          <strong>内蔵AIの4段階切替</strong>：<code>Mode 0</code> / <code>全ツッパ Lv.1</code> / <code>Lv.2 手なり</code> / <code>Lv.2 点差</code> を設定でき、立直・和了方針や思考ログも確認できます。対局中に卓上の席バッジをダブルクリックすれば、内蔵AI 4段階を順繰りに素早く切り替えられます（※Mode 2 は解除のみ）。
+        </li>
+        <li>
+          <strong>外部LLM／ローカルLLM連携（Mode 2・セカンドオピニオン）</strong>：お好みの外部LLM APIやローカルLLMを接続することで、対局中の相手思考（<code>opponentRead</code> / <code>reason</code>）の言語化や、自分の打牌候補に対するセカンドオピニオン、コマンドバー操作を利用できます（※実機最終点検中）。
+        </li>
+        <li>
+          <strong>安全なローカル管理と自動フォールバック</strong>：入力した <strong>APIキーはブラウザ内で完結</strong> し、開発者側サーバーへ送信されることはありません。また、通信エラーや応答異常が発生しても対局が停止しないよう、<strong>エラー時は自動的に内蔵AI（Mode 1）へフォールバック</strong> します。
+        </li>
+      </ul>
+      <p>
+        LLM接続の詳細手順やプロンプト例・技術仕様については、<a href="../04-lab/index.html">第4冊：実験室・技術資料</a> をご覧ください。
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../app/free.html" target="_blank" rel="noopener">▶ 無料Web版をひらく</a>
+        <a class="btn btn-secondary" href="../03-thinking/index.html">第3冊：一者視点の脳内整理へ進む</a>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="前後の冊子">
+      <a class="pager-link" href="../01-primer/index.html">
+        <span class="pager-dir">← 前の冊子へ</span>
+        <span class="pager-title">第1冊：ツールを使う前の助走</span>
+      </a>
+      <a class="pager-link pager-next" href="../03-thinking/index.html">
+        <span class="pager-dir">次の冊子へ →</span>
+        <span class="pager-title">第3冊：一者視点の脳内整理</span>
+      </a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-credit">制作・著作：東雲研究所 チームサカモト / 東雲六字（しののめ むつき / Shinonome Mutsuki）</p>
+      <p class="footer-links">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" target="_blank" rel="noopener">無料Web版をひらく</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

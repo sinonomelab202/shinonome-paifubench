@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第4冊：実験室・技術資料｜東雲牌譜ベンチ</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="../index.html">東雲牌譜ベンチ</a>
+      <nav class="site-nav" aria-label="サイトナビゲーション">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html" class="active" aria-current="page">4.実験室</a>
+        <a href="../app/free.html" class="nav-app" target="_blank" rel="noopener">無料版をひらく</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb"><a href="../index.html">トップ</a> / 第4冊：実験室・技術資料</p>
+    <span class="book-label">第4冊</span>
+    <h1 class="page-title">実験室・技術資料</h1>
+    <p class="page-lead">
+      本ツールの設計背景コラム、人間思考×AI思考のスパーリング手法、すぐコピーして使える外部LLM向け実務プロンプト集、Core Protocol Spec v1.2 の概要、およびデータ4分類と利用マナーをまとめた技術・運用資料です。
+    </p>
+
+    <nav class="toc" aria-label="目次">
+      <p class="toc-title">この冊子の目次</p>
+      <ol>
+        <li><a href="#sec-1">設計背景コラム（私見）：牌理以前と牌理以後のアプローチ変遷</a></li>
+        <li><a href="#sec-2">人間思考 × AI思考の往復実験（スパーリング手法）</a></li>
+        <li><a href="#sec-3">実務プロンプト集（外部AI・ローカルLLM連携用）</a></li>
+        <li><a href="#sec-4">データ4形式とオープン規格（Core Protocol Spec v1.2 概要）</a></li>
+        <li><a href="#sec-5">データの4分類・権利帰属と利用マナー</a></li>
+        <li><a href="#sec-6">クレジット ＆ 入手案内</a></li>
+      </ol>
+    </nav>
+
+    <!-- ============================================================ -->
+    <section id="sec-1">
+      <h2>1. 設計背景コラム（私見）：牌理以前と牌理以後のアプローチ変遷</h2>
+      <p class="note-text">
+        ※本節は厳密な麻雀歴史考証ではなく、本ツールの設計思想を整理するための開発者の設計メモ（私見）です。
+      </p>
+
+      <h3>1-1. 牌理以前：ゲームの構造と「不確実性の濃淡」</h3>
+      <p>
+        立直麻雀というゲームを構造面から眺めたとき、ひときわ強い特徴になっているのが<strong>「放銃一家包（ロンされた1人が点数を全額支払う仕組み）」</strong>と<strong>「フリテン」</strong>の組み合わせです。自分のアガリだけを追えばよいわけではなく、自分の河に捨てた牌がそのまま相手に対する防御の安全牌（現物）になり、同時に自分の待ちの制約にもなる――この仕組みによって、攻撃と守備が1枚の打牌の中で切り離せない<strong>攻守一体</strong>のゲーム性が生まれています。
+      </p>
+      <p>
+        そして卓上のプレイヤーが置かれているのは、全情報が見渡せる神視点ではなく<strong>一者視点</strong>です。自手・河・副露・ドラ表示牌のように確定した領域から、捨て牌順や手出しツモ切りといった推察の中間層を経て、他家手牌・山・王牌という深い霧の中へと連なる<strong>不確実性のグラデーション</strong>の中で、限られた思考資源を使って毎巡の決断を下し続ける構造になっています。
+      </p>
+
+      <h3>1-2. 牌理以後：計算アプローチの変遷と「翻訳の置き去り」</h3>
+      <p>
+        麻雀を数理・計算機で扱おうとする試みは、時代とともに大きく段階を経てきました。本ツールの設計にあたっては、その流れを次の3つの段階として捉えています。
+      </p>
+      <ol>
+        <li>
+          <strong>モンテカルロ探索 ➔ 牌譜統計と「次元の呪い」</strong><br>
+          不完全情報の中で期待値を測る試みとして、未知の山・他家手牌を何度も仮定して回すモンテカルロ探索や、膨大な実戦牌譜から条件別の和了率・放銃率・局収支を割り出す統計アプローチが発展しました。しかし、巡目・点数状況・ドラ枚数・他家の仕掛け・河の濃淡といった条件が掛け合わさるほど局面空間は爆発的に膨れ上がり、細かな局面の文脈をすべて統計表に収め切ろうとすると「次元の呪い」に突き当たります。
+        </li>
+        <li>
+          <strong>深層強化学習AIの台頭 ➔ ブラックボックス化と「翻訳の置き去り」</strong><br>
+          深層強化学習ベースの専門麻雀AIが登場し、人間のトップ層を凌駕する強さと、局面ごとの推奨打牌・悪手率といった評価値を提示できるようになりました。一方で、強さが飛躍的に高まった反面、その判断根拠は高次元の重みの中に畳み込まれた<strong>ブラックボックス</strong>になりがちです。「なぜこの1打が良いのか」「人間の実戦感覚とどこでズレたのか」を人間が再現可能な言葉へ落とし込む<strong>翻訳のプロセスが置き去りになりやすい</strong>という課題が残ります。
+        </li>
+        <li>
+          <strong>LLMによる言語化・対話の提案 ➔ 決定論的コア8割 × 確率的LLM2割の疎結合分業</strong><br>
+          汎用LLMは麻雀の厳密な枚数計算や向聴数カウントをそのまま任せると容易に数え間違い（ハルシネーション）を起こしますが、与えられた確定指標をもとに方針の比較や読みの言語化・対話を行う適性を持っています。そこで本ツールは、<strong>136枚の物理保存則・全28役複合向聴数・受入・見かけ残り枚数・安全度といった「決定論的コア（8割）」をブラウザ内の純粋ロジックで厳密に算出し、言語化や方針比較といった「確率的LLM（2割）」へ疎結合に渡す分業構造</strong>を採っています。
+        </li>
+      </ol>
+
+      <div class="callout">
+        <p class="callout-title">設計の結論：強いAIの正解を当てさせる機械ではなく「道場」へ</p>
+        <p>
+          本ツールが目指しているのは、最強AIの1択の正解を当てさせて採点する機械ではありません。<strong>確定指標（機械の「目」）と、人間やLLMの推論（方針・言語化の「頭脳」）を並べて比較し、必要なら同じ局面を別ツモで打ち直して確かめられるスパーリング環境（道場）</strong>を提供することです。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-2">
+      <h2>2. 人間思考 × AI思考の往復実験（スパーリング手法）</h2>
+
+      <h3>2-1. 専門麻雀AI（強化学習系）と汎用LLMの役割の違い</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>専門麻雀AI（強化学習系）</h4>
+          <p>
+            膨大な自己対局によって期待値・順位分布を最適化する「勝率の基準点」として極めて優秀です。一方で、判断の背後にある思考手順を人間向けに噛み砕いて対話する役割は本来領域ではありません。
+          </p>
+        </div>
+        <div class="info-box">
+          <h4>汎用LLM（本ツール連携・プロンプト併用）</h4>
+          <p>
+            単体では麻雀の厳密計算が苦手ですが、本ツールの静的解析（確定事実）を土台に与えることで、「速度・打点・守備のトレードオフを言語化する壁打ち相手」として機能します。
+          </p>
+        </div>
+      </div>
+
+      <h3>2-2. 人間×AI思考往復の5ステップ・テンプレート</h3>
+      <p>
+        外部LLMやローカルLLMを練習の壁打ち相手として使う際は、いきなり「何を切るべき？」と聞くのではなく、次の5ステップで人間とAIの思考を往復させると学習密度が大きく上がります。
+      </p>
+      <ol class="step-list">
+        <li>
+          <strong>局面の提示</strong><br>
+          検討したい1局面をテキスト形式（Spec v1.2）や本ツールの盤面・静的解析データとして整理し、確定している公開情報だけを明示します。
+        </li>
+        <li>
+          <strong>人間の実戦感覚</strong><br>
+          先に人間側が「この局面で自分は何を切りたいか」「どの手役や押し引きを意識したか」「誰をどの程度警戒しているか」を短く書き出します。
+        </li>
+        <li>
+          <strong>機械の「目」で見る</strong><br>
+          本ツールの静的解析パネル（全28役複合向聴数・<code>ΔS</code>・受入・見かけ残り枚数・見え切り警告・守備安全度）で、数え漏れや前提の見落としを確定させます。
+        </li>
+        <li>
+          <strong>AIの「頭脳」と比較</strong><br>
+          本ツールの外部LLM連携（Mode 2 / セカンドオピニオン <span class="tag-full">FULL</span>）や、次節の「1局面解説プロンプト」を使って、方針別の選択肢比較や他家読み（<code>opponentRead</code> / <code>reason</code>）を引き出し、自分の思考と突き合わせます。
+        </li>
+        <li>
+          <strong>人間へのフィードバック</strong><br>
+          AIの言葉を鵜呑みにせず、「自分の見落としていた判断軸は何か」「逆にAIが軽視していた場況や点況は何か」を1〜2行で言語化し、必要なら <span class="ui-label">🎲 IF別ツモ</span> <span class="tag-full">FULL</span> で別展開を打ち直して検証します。
+        </li>
+      </ol>
+
+      <h3>2-3. 「1局面主軸」と「転換点抽出」の切り分け</h3>
+      <p>
+        1局の最初から最後まで、あるいは半荘全体の全巡目をAIに一括で詳細解説させようとすると、コンテキストの情報量が肥大化して後半の精度が落ちたり、途中の手出し・ツモ切りが省略されたログの限界から無理な後知恵推測が混ざりやすくなります。
+      </p>
+      <p>
+        そのため実務では、<strong>① 本当に迷った「1局面」を深掘りする（1局面主軸）</strong>ことと、<strong>② 1局・半荘全体を通す場合は「分岐が生じた2〜3か所の転換点だけを抽出する（転換点抽出）」</strong>ことに役割を切り分ける運用を推奨します。
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-3">
+      <h2>3. 実務プロンプト集（外部AI・ローカルLLM連携用）</h2>
+      <p>
+        お持ちの外部AIチャット（ChatGPT / Claude / Gemini 等）やローカルLLMへそのまま貼り付けて使える実務プロンプトです。各ブロック右上のボタンからワンクリックでコピーできます。
+      </p>
+
+      <h3>3-1. 単発OCR・文字起こし補助プロンプト（画像・メモ ➔ Spec v1.2 変換）</h3>
+      <p>
+        盤面のスクリーンショットや手書きメモを、本ツールでそのまま読み込める 1 行テキスト形式（Core Protocol Spec v1.2 粗結合文字列）へ変換するためのプロンプトです。
+      </p>
+      <p>
+        <strong>読み込み手順</strong>：AIが出力した1行テキストをコピーし、アプリ上部の <span class="ui-label">📂 牌譜・保存</span>（FREE版では <span class="ui-label">📂 局面をひらく</span>） ➔ <span class="ui-label">📋 コード貼付で読込</span> ➔ <span class="ui-label">📥 盤面に読み込む</span> を押します。
+      </p>
+
+      <div class="callout callout-warn">
+        <p class="callout-title">つまずきやすい2大ポイント（重要注意）</p>
+        <ol>
+          <li>
+            <strong>1局＝必ず1行（パイプ <code>|</code> 区切り）</strong>：途中で改行（<code>\n</code>）が入ると、本ツールは別々の局として分割して解釈します。出力が複数行に折り返されていた場合は1行に繋ぎ直してください。
+          </li>
+          <li>
+            <strong>ツモ切り <code>.</code> やリーチ <code>*</code> は直前の1牌のみに帰属</strong>：たとえば <code>12m.</code> は「<code>1m</code> が手出し、<code>2m</code> のみツモ切り」という意味になり、<code>1.2m</code> のような途中挿入は構文エラーになります。記号を付けたい牌は <code>1m.2m</code> や <code>1m*2m</code> のように、1牌単位でスート文字を付けて記述してください。
+          </li>
+        </ol>
+      </div>
+
+      <div class="prompt-block">
+        <div class="prompt-header">
+          <span class="prompt-title">プロンプト 3-1：単発OCR・文字起こし補助（Spec v1.2 変換）</span>
+          <button type="button" class="copy-btn" data-copy-target="prompt-ocr">📋 プロンプトをコピー</button>
+        </div>
+        <pre><code id="prompt-ocr">あなたは麻雀の盤面画像またはテキストメモを、以下のプレーンテキスト形式（Core Protocol Spec v1.2 粗結合文字列）へ正確に文字起こしするアシスタントです。
+
+【厳守ルール】
+1. 出力は必ず「1局＝1行」とし、各項目は改行せずパイプ（ | ）で繋ぐこと（改行すると別局として解釈されるため厳禁）。
+2. 画像やメモから「100%確実に読み取れる牌」だけを記載すること。
+3. 伏せられている他家の手牌、読み取れない牌、不鮮明な牌は絶対に推測で補完せず、`?` と記載するか、該当項目を省略すること（ハルシネーション厳禁）。
+4. 牌の表記は MPSZ形式（萬子:1m-9m, 筒子:1p-9p, 索子:1s-9s, 東:1z, 南:2z, 西:3z, 北:4z, 白:5z, 發:6z, 中:7z、赤5は 0m/0p/0s）を使うこと。
+5. 河（捨て牌）の修飾記号（リーチ宣言牌 `*`、ツモ切り `.`）はスート文字の直後にある1牌のみに帰属する。連続する同スート牌に記号を付ける場合は `1m.2m` や `1m*2m` のように1牌ごとにスート文字を書くこと（`1.2m` は構文エラー）。ツモ切り判別不能な牌には `.` を付けないこと。
+
+【出力フォーマット（1行サンプル）】
+round: E1 | honba: 0 | kyotaku: 0 | dora: 5p | scores: 25000,25000,25000,25000 | hand0: 123m456p789s1155z | river0: 9s1z.2z | river1: 1m9p7z* | river2: 3z4z | river3: 8m2p
+
+※ 0=自家, 1=下家, 2=対面, 3=上家。他家手牌（hand1〜hand3）が伏せられている場合は項目を省略するか `hand1: ?????????????` とすること。
+上記の1行フォーマットのみをコードブロックで出力し、戦術的な解説や推測は一切書かないでください。</code></pre>
+      </div>
+
+      <h3>3-2. 1局面解説プロンプト（後知恵抑止・不確定断定回避）</h3>
+      <p>
+        1局面の盤面情報と静的解析の数値をもとに、後知恵や不確定情報の断定を抑えながら、方針別の比較と意識すべき判断軸を整理してもらうためのプロンプトです。
+      </p>
+
+      <div class="prompt-block">
+        <div class="prompt-header">
+          <span class="prompt-title">プロンプト 3-2：1局面解説（後知恵抑止・不確定断定回避）</span>
+          <button type="button" class="copy-btn" data-copy-target="prompt-explain">📋 プロンプトをコピー</button>
+        </div>
+        <pre><code id="prompt-explain">あなたは麻雀の「一視点の思考整理アシスタント」です。提示された1局面の盤面情報（視点プレイヤーから観測可能な公開情報と静的解析指標）のみに基づき、この局面の構造と選択肢を解説してください。
+
+【厳守制約】
+1. 後知恵バイアスの禁止：結果や未来のツモを前提にした評価を一切行わないこと。
+2. 不確定情報の断定禁止：伏せられている他家の手牌や山に残っている牌を「持っているはず」「山にいる」と断定しないこと。必ず「河や副露から推察される可能性」「見かけ上の残り枚数」として表現すること。
+3. 正解の押し付け禁止：1つの打牌を絶対の正解として断定せず、方針の違い（速度・打点・守備）による選択肢の比較として提示すること。
+
+【出力構成】
+1. 状況の整理（確定事実）：巡目、点棒状況、ドラ、自手の現在向聴数と狙える手役の方向性。
+2. 他家の河・場況の読み（仮説）：各家の手出し・ツモ切り・副露から読み取れる進行度と警戒すべき色・牌。
+3. 主な選択肢の比較（2〜3案）：
+   - 候補A（速度・受け入れ重視）：メリットとリスク
+   - 候補B（打点・手役重視 または 守備・スリム化重視）：メリットとリスク
+4. この局面で意識すべき判断軸（1〜2点）：実戦で同様の局面に出会った際の思考の焦点。</code></pre>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-4">
+      <h2>4. データ4形式とオープン規格（Core Protocol Spec v1.2 概要）</h2>
+      <p>
+        本ツールは特定サーバーや独自バイナリに閉じ込めないため、用途に応じた4つのオープンなデータ形式を使い分けています。
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>データ形式</th>
+              <th>表記・識別子</th>
+              <th>主な用途と特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>① 粗結合文字列</strong></td>
+              <td>Spec v1.2<br><span class="note-text">（1局＝1行 <code>|</code> 区切り）</span></td>
+              <td>人間が読んで直接編集しやすく、外部AIチャットとの入出力にも強いプレーンテキスト形式。改行（<code>\n</code>）で複数局を並べた <code>.txt</code> バッチ読込（FULL）にも対応します。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>② 単局シード</strong></td>
+              <td><code>#ST317-...</code></td>
+              <td>URLハッシュに1局分の盤面・設定を圧縮格納する共有形式。SNSやメモでURLが途中で切れる事故を防ぐため <strong>2,000字ガード</strong> を備えています。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>③ 何切る出題シード</strong></td>
+              <td><code>#QZ1-...</code></td>
+              <td>1打回答式の何切る問題を出題するための共有形式。回答するまでヒント・正解・解説をロックするネタバレ防止仕様を備えます（作成はFULL、回答はFREE/FULL共通）。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>④ 視点マスク済みJSON</strong></td>
+              <td>JSONファイル / ペイロード</td>
+              <td>FULL版のローカル保存庫バックアップ（エクスポート／インポート）および外部LLM連携時の構造化ペイロードとして使用します。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout">
+        <p class="callout-title">プロトコル設計の2つの基本原則</p>
+        <ul>
+          <li>
+            <strong>物理保存則（136枚上限・行番号エラー検出）</strong>：同種牌の4枚超過や136枚を超える矛盾した入力を検証し、複数局バッチ読込時も該当行番号を明示してエラー検出します。
+          </li>
+          <li>
+            <strong>透視遮断と確定情報の保持（Round-Trip 防護）</strong>：非公開の手牌や未判別のツモ切り（<code>unknown</code>）を勝手に捏造せず保持し、書き出し ➔ 再読み込み（Round-Trip）を繰り返しても「確定していた情報」と「不明だった情報」の境界が壊れない設計です。
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-5">
+      <h2>5. データの4分類・権利帰属と利用マナー</h2>
+      <p>
+        本ツールはオープンテキストの純粋な「受け皿」として動作するため、取り扱う局面・牌譜データの由来と公開可否は、利用者自身が以下の4分類（アプリ内 <span class="ui-label">❓ 解説</span> 規約の正本表記と統一）に沿って自己管理します。
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>区分（アプリ内正本表記）</th>
+              <th>想定されるデータ例</th>
+              <th>利用・公開の目安</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>① 自作・個人練習</strong></td>
+              <td>ご自身で作成した何切る問題・ランダム配牌・手組練習データ。</td>
+              <td><strong>制限なし</strong>（個人利用・共有・公開いずれも可）。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>② 権利者公開・許諾済</strong></td>
+              <td>権利者本人が公式公開しているデータ、または利用・共有許諾済の牌譜・局面。</td>
+              <td><strong>許諾範囲内で可</strong>（各権利者が示す条件・クレジット表記を遵守）。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>③ 私的メモ・研究用</strong></td>
+              <td>個人学習・検討目的の私的メモや研究データ。</td>
+              <td><strong>私的利用のみ可</strong>／無断での公開・再配布は NG。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>④ その他第三者由来データ</strong></td>
+              <td>オンライン麻雀の実戦牌譜・書籍・動画・有料教材等の第三者由来データ。</td>
+              <td><strong>私的練習のみ可</strong>（提供元の規約・権利条件を確認）／無断公開・転載・出題リンク公開は NG。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>運用上の重要原則（アプリ内規約 全8項目対応）</h3>
+      <ul>
+        <li>
+          <strong>単発手作業と自動抽出の境界</strong>：本アプリの利用範囲は、1牌譜単位の手動入力・テキスト貼付および単発のOCR補助による検討・学習に限定されます。URL指定による自動取得、配信画面の常時キャプチャ、複数試合の一括収集（スクレイピング・自動巡回）には一切非対応であり、これらを目的とした利用を禁止します。
+        </li>
+        <li>
+          <strong>エアギャップ原則</strong>：アプリ本体はオープンテキスト形式（<code>Spec v1.2</code> / <code>ST317</code> / <code>QZ1</code>）の純粋な「受け皿」に徹し、他社サービスからの自動抽出機能や専用コンバータを一切内蔵せず、外部サービスから独立して動作します。
+        </li>
+        <li>
+          <strong>掲載元コンテキストによる真正性判断（なりすまし免責）</strong>：プロトコル文字列や共有コード自体に暗号署名や発行者認証はありません。公式性や許諾の有無は文字列そのものではなく、「権利者本人の公式概要欄・公式アカウント等に掲載されているか」という掲載元コンテキストで判断してください。なりすまし・改変された文字列の信頼性や紛争について開発元は責任を負いません。
+        </li>
+        <li>
+          <strong>他社データ無断公開の禁止</strong>：第三者の対局データ、著作権物、各サービスの利用規約で転載・再配布が禁じられたデータの無断公開・再配布を行わないでください。共有リンクやテキスト出力の公開適法性は利用者自身の責任で確認するものとします。
+        </li>
+        <li>
+          <strong>AI生成牌譜の著作権と「研究パッケージ」の考え方</strong>：内蔵AIやLLMの対局・検討から生成された単なる牌の並び（データ配列）そのものを独占的に囲い込むのではなく、人間が選んだ局面・設問・解説・構成といった創作的な編集やコメントを伴う<strong>「研究パッケージ」</strong>として価値を扱う考え方を推奨しています。
+        </li>
+        <li>
+          <strong>外部LLM送信同意とAPIキー保存範囲</strong>：外部・ローカルLLM連携はFULL版における任意のオプトイン機能であり、初回利用時に送信同意を確認します。送信プロンプト・静止画・APIキーは開発元サーバーへ一切収集されず、利用者ブラウザ内から指定先への直接通信で完結します（APIキーは既定でメモリ保持のみ／明示オプトイン時のみ端末の <code>localStorage</code> に保存、ログ・JSON出力には非混入）。
+        </li>
+        <li>
+          <strong>無保証（AS-IS）および第三者モデルの免責</strong>：本アプリは現状有姿（AS-IS）で提供され、計算結果・手役評価・AI出力・保存データの正確性・完全性・特定目的への適合性について一切保証しません。また、利用者が接続・使用する第三者製AIモデル（商用API・ローカルLLM・カスタムモデル等）の商用利用可否・クレジット表記義務・利用規約の遵守は、すべて利用者自身の責任において各提供元のライセンス条件に従うものとします。
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-6">
+      <h2>6. クレジット ＆ 入手案内</h2>
+
+      <div class="callout">
+        <p class="callout-title">クレジット・著作権表記</p>
+        <p>
+          <strong>制作・著作</strong>：東雲研究所 チームサカモト / 東雲六字（しののめ むつき / Shinonome Mutsuki）
+        </p>
+      </div>
+
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>無料Web版（FREE）</h4>
+          <p>
+            広告なし・登録不要・ブラウザ0秒起動。単局練習・全28役複合向聴数＆見かけ残りvs実山の静的解析・共有URL観戦＆何切る回答を今すぐ試せます。
+          </p>
+          <p>
+            <a class="btn btn-primary" href="../app/free.html" target="_blank" rel="noopener">▶ 無料Web版をひらく</a>
+          </p>
+        </div>
+
+        <div class="info-box">
+          <h4>オフライン完全版（FULL）</h4>
+          <p>
+            一局IF反復・東風/半荘・盤面エディタ＆<code>QZ1-</code>何切る出題・相手AI詳細カスタム＆外部/ローカルLLM連携・ローカル保存庫を備えた完全オフライン単一HTML（買い切り500円・予定）。
+          </p>
+          <!-- FULL_STORE_URL -->
+          <p>
+            <span class="btn btn-muted" aria-disabled="true">配布ページ（BOOTH / note）準備中</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="前後の冊子">
+      <a class="pager-link" href="../03-thinking/index.html">
+        <span class="pager-dir">← 前の冊子へ</span>
+        <span class="pager-title">第3冊：一者視点の脳内整理</span>
+      </a>
+      <a class="pager-link pager-next" href="../index.html">
+        <span class="pager-dir">トップへ戻る →</span>
+        <span class="pager-title">公式Webガイド トップページ</span>
+      </a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-credit">制作・著作：東雲研究所 チームサカモト / 東雲六字（しののめ むつき / Shinonome Mutsuki）</p>
+      <p class="footer-links">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" target="_blank" rel="noopener">無料Web版をひらく</a>
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      function fallbackCopy(text) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.top = '-9999px';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try {
+          ok = document.execCommand('copy');
+        } catch (e) {
+          ok = false;
+        }
+        document.body.removeChild(ta);
+        return ok;
+      }
+
+      function markCopied(btn) {
+        var orig = btn.getAttribute('data-orig-label') || btn.textContent;
+        btn.setAttribute('data-orig-label', orig);
+        btn.textContent = '✅ コピーしました';
+        btn.classList.add('copied');
+        clearTimeout(btn._copyTimer);
+        btn._copyTimer = setTimeout(function () {
+          btn.textContent = orig;
+          btn.classList.remove('copied');
+        }, 1500);
+      }
+
+      var buttons = document.querySelectorAll('.copy-btn[data-copy-target]');
+      for (var i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener('click', function () {
+          var btn = this;
+          var targetId = btn.getAttribute('data-copy-target');
+          var el = document.getElementById(targetId);
+          if (!el) return;
+          var text = el.textContent;
+          if (navigator.clipboard && typeof navigator.clipboard.writeText === 'function') {
+            navigator.clipboard.writeText(text).then(function () {
+              markCopied(btn);
+            }).catch(function () {
+              if (fallbackCopy(text)) markCopied(btn);
+            });
+          } else {
+            if (fallbackCopy(text)) markCopied(btn);
+          }
+        });
+      }
+    })();
+  </script>
+</body>
+</html>

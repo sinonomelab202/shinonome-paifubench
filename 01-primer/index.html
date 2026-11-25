@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第1冊：ツールを使う前の助走｜東雲牌譜ベンチ</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="../index.html">東雲牌譜ベンチ</a>
+      <nav class="site-nav" aria-label="サイトナビゲーション">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html" class="active" aria-current="page">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" class="nav-app" target="_blank" rel="noopener">無料版をひらく</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb"><a href="../index.html">トップ</a> / 第1冊：ツールを使う前の助走</p>
+    <span class="book-label">第1冊</span>
+    <h1 class="page-title">ツールを使う前の助走</h1>
+    <p class="page-lead">
+      麻雀経験者向けの3分ガイドです。このツールの立ち位置、画面全体の地図、そして第2冊・第3冊を読むための最小限の共通言語を整理します。
+    </p>
+
+    <nav class="toc" aria-label="目次">
+      <p class="toc-title">この冊子の目次</p>
+      <ol>
+        <li><a href="#sec-1">このツールは何をする道具か</a></li>
+        <li><a href="#sec-2">画面の全体地図（プレイ卓＋上部窓口）</a></li>
+        <li><a href="#sec-3">第2・3冊を読むための最小限の共通言語</a></li>
+        <li><a href="#sec-4">次の読み進め方</a></li>
+      </ol>
+    </nav>
+
+    <section id="sec-1">
+      <h2>1. このツールは何をする道具か</h2>
+      <p>
+        本ツールは、ネット対戦やレート戦を楽しむゲームではなく、<strong>1人用の麻雀練習・研究ベンチ（道場）</strong> です。実戦のテンポに追われず、自分の手組や押し引きの判断を立ち止まって検証するために作られています。
+      </p>
+
+      <div class="callout">
+        <p class="callout-title">設計の2つの柱</p>
+        <ul>
+          <li>
+            <strong>根幹は「1局を打ち切ること」と、一局IF反復による N=1 結果論の検証</strong><br>
+            麻雀は1回限りの実戦結果（N=1）だけでは、「選択が良かったのか、たまたまツモに恵まれただけなのか」を区別できません。まずは配牌から終局まで1局をしっかり打ち切り、さらに同じ局面を同じ山・別のツモ山で打ち直すことで、結果論から離れて判断の妥当性を確かめます。
+          </li>
+          <li>
+            <strong>「計算できる数値（目）」と「方針・言語化（頭脳）」の分離</strong><br>
+            向聴数・受入枚数・見かけの残り枚数・安全度といった 136 枚から厳密に計算できる領域はツールが「目」として正確に提示します。プレイヤーはその数値を土台に、「どのルートで和了を狙うか」「どこまで押してどこで降りるか」という「頭脳（方針決定・言語化）」に集中する構造です。
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section id="sec-2">
+      <h2>2. 画面の全体地図（プレイ卓＋上部窓口）</h2>
+      <p>
+        ツール全体は、メインとなる「プレイ卓 ＆ 静的解析」と、画面上部に並ぶ機能窓口で構成されています。まずは「どこに何があるか」の全体像だけ掴んでおけば十分です。
+      </p>
+
+      <div class="callout callout-navy">
+        <p class="callout-title">無料Web版（FREE）の窓口構成について</p>
+        <p>
+          無料Web版（FREE）では制作・保存・外部AI設定が省かれ、上部窓口は <strong><span class="ui-label">📂 局面をひらく</span> / <span class="ui-label">❓ 解説</span> の2窓口構成</strong> になります。完全版（FULL）では下表の全領域が利用できます。
+        </p>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>領域・窓口名</th>
+              <th>役割の概要</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>プレイ卓 ＆ 静的解析</strong><br><span class="note-text">（メイン画面）</span></td>
+              <td>対局の進行、単純リプレイ、単局練習や一局IF反復、そして全28役複合向聴数・受入・押し引き・守備安全度などのリアルタイム静的解析を行う主画面です。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>🛠️ つくる・直す</strong> <span class="tag-full">FULL</span></td>
+              <td>任意の盤面・ルール編集、不完全情報局面の作成・編集、ネタバレ防止つきの何切る出題リンク（<code>QZ1-</code>）作成を行う制作窓口です。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>📂 牌譜・保存</strong><br><span class="note-text">（FREEでは「📂 局面をひらく」）</span></td>
+              <td>テキストコードの貼付読込（単局／FULLでは複数局バッチ対応）や、ブラウザ内のローカル保存庫への保存・復元（FULL）、JSONバックアップを扱うデータ窓口です。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>🤖 相手AI</strong> <span class="tag-full">FULL</span></td>
+              <td>他家3席の内蔵AIレベル切替・立直や和了の方針設定、思考ログ確認、および外部LLM／ローカルLLM連携（Mode 2・セカンドオピニオン等）を設定する窓口です。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>❓ 解説</strong></td>
+              <td>使い方・利用規約・ガイドライン・FAQ・テキスト仕様の簡易案内を開く窓口です。画面最下部のフッターからも同じ解説を開けます。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="sec-3">
+      <h2>3. 第2・3冊を読むための最小限の共通言語</h2>
+      <p>
+        この先の説明書や思考整理ガイドでは、盤面の判断を共通の言葉で扱うため、以下の基本用語を使います。
+      </p>
+
+      <h3>3-1. 判断の2つの軸</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>手組の軸（和了可能性の把握）</h4>
+          <p>
+            自分の手がアガリまであと何歩か、どの牌を引けば形が伸びるか、どの手役ルートが現実的かを見積もる軸です。主に向聴数・受入・狙い目手役から捉えます。
+          </p>
+        </div>
+        <div class="info-box">
+          <h4>危険察知の軸（相手の危険性の把握）</h4>
+          <p>
+            他家がテンパイしている可能性や、自分が切る牌が当たり牌になりうるリスクを見積もる軸です。押し引きは常に「手組の軸」と「危険察知の軸」のバランスで判断します。
+          </p>
+        </div>
+      </div>
+
+      <h3>3-2. 進行と残り枚数の指標</h3>
+      <ul>
+        <li>
+          <strong>向聴数（シャンテン数）</strong>：テンパイ（あと1枚でアガリ＝0向聴）までに必要な有効牌の最小ステップ数です。1向聴（イーシャンテン）、2向聴（リャンシャンテン）のように数え、数値が小さいほどアガリに近づきます。
+        </li>
+        <li>
+          <strong>受入（うけいれ）</strong>：引くと向聴数が進んだりテンパイ形が良くなったりする「有効牌の種類と合計枚数」です。同じ向聴数でも、受入が広い選択ほど次巡以降に手が進みやすくなります。
+        </li>
+        <li>
+          <strong>見かけの残り枚数（公開情報ベース）</strong>：自分の手牌・全員の河（捨て牌）・晒された鳴き・ドラ表示牌など、<strong>場に見えている公開情報だけ</strong> を4枚から差し引いた残り枚数です。実戦では他家の手牌の中身は見えないため、プレイヤーが判断の基準にできる現実的な数値になります。
+        </li>
+        <li>
+          <strong>見え切り／空聴（カラテン）</strong>：待ち牌や必要な牌の4枚すべてがすでに場に見えてしまい、見かけの残りが0枚になっている状態が「見え切り」です。テンパイしていても待ち牌が1枚も残っていない状態を「空聴」と呼びます。
+        </li>
+      </ul>
+
+      <h3>3-3. 守備の基本指標</h3>
+      <ul>
+        <li>
+          <strong>現物（げんぶつ）</strong>：対象となる相手がすでに自分の河に捨てている牌（およびリーチ宣言後に他家が切って見逃された牌）です。フリテンルールにより、その相手に対して <strong>100%安全（ロンされない）</strong> 牌となります。
+        </li>
+        <li>
+          <strong>壁（カベ）／ノーチャンス</strong>：ある数牌（たとえば6萬）が場に4枚すべて見えているとき、相手はその牌を使った両面待ち（5-6-7 や 6-7-8）を組めなくなります。外側の牌に対する両面放銃リスクが消える強力な守備材料です（※単騎・シャンポン・カンチャン等の待ちは残るため100%安全ではありません）。
+        </li>
+        <li>
+          <strong>手出し・ツモ切り</strong>：相手が山から引いた牌をそのまま捨てたのが「ツモ切り」、もともと手牌にあった牌と入れ替えて捨てたのが「手出し」です。手出しの頻度やタイミングは、相手の手がどの程度動いているかを読む手がかりになります。
+        </li>
+      </ul>
+    </section>
+
+    <section id="sec-4">
+      <h2>4. 次の読み進め方</h2>
+      <p>
+        ここまでの前提を押さえたら、目的に合わせて次の冊子へ進んでください。まずは無料Web版を別タブで開きながら読むのもおすすめです。
+      </p>
+
+      <ul>
+        <li>
+          <strong>機能の全体像や操作方法・FREE/FULLの違いを知りたい</strong>
+          → <a href="../02-manual/index.html">第2冊：ツールの基本説明書</a>
+        </li>
+        <li>
+          <strong>解析数値や河の見方を1人称視点でどう整理するか知りたい</strong>
+          → <a href="../03-thinking/index.html">第3冊：一者視点の脳内整理</a>
+        </li>
+        <li>
+          <strong>設計背景・AI連携プロンプト・Spec v1.2・データ分類と規約を確認したい</strong>
+          → <a href="../04-lab/index.html">第4冊：実験室・技術資料</a>
+        </li>
+      </ul>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../app/free.html" target="_blank" rel="noopener">▶ 無料Web版をひらく</a>
+        <a class="btn btn-secondary" href="../02-manual/index.html">第2冊：ツールの基本説明書へ進む</a>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="前後の冊子">
+      <a class="pager-link" href="../00-intro/index.html">
+        <span class="pager-dir">← 前の冊子へ</span>
+        <span class="pager-title">第0冊：はじめての麻雀</span>
+      </a>
+      <a class="pager-link pager-next" href="../02-manual/index.html">
+        <span class="pager-dir">次の冊子へ →</span>
+        <span class="pager-title">第2冊：ツールの基本説明書</span>
+      </a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-credit">制作・著作：東雲研究所 チームサカモト / 東雲六字（しののめ むつき / Shinonome Mutsuki）</p>
+      <p class="footer-links">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" target="_blank" rel="noopener">無料Web版をひらく</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>

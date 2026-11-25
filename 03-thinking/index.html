@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>第3冊：一者視点の脳内整理｜東雲牌譜ベンチ</title>
+  <link rel="stylesheet" href="../assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="site-brand" href="../index.html">東雲牌譜ベンチ</a>
+      <nav class="site-nav" aria-label="サイトナビゲーション">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html" class="active" aria-current="page">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" class="nav-app" target="_blank" rel="noopener">無料版をひらく</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <p class="breadcrumb"><a href="../index.html">トップ</a> / 第3冊：一者視点の脳内整理</p>
+    <span class="book-label">第3冊</span>
+    <h1 class="page-title">一者視点の脳内整理</h1>
+    <p class="page-lead">
+      なぜ他家の手牌を <code>?</code> で伏せるのか、なぜAIの推奨を1択で押し付けず数値と理由を分けて並べるのか――画面設計の裏にある「牌理の仮説（見取り図）」を、ツールの各機能と1対1で対応づけて整理します。
+    </p>
+
+    <nav class="toc" aria-label="目次">
+      <p class="toc-title">この冊子の目次</p>
+      <ol>
+        <li><a href="#sec-1">この冊子の位置づけ：「正解」ではなく「見取り図」</a></li>
+        <li><a href="#sec-2">脳内整理の土台：3つの領域と2つの目的</a></li>
+        <li><a href="#sec-3">機能と「牌理の仮説」の対応表（4機能）</a></li>
+        <li><a href="#sec-4">まとめ：ツールを「答え合わせ機」ではなく「道場」として使う</a></li>
+      </ol>
+    </nav>
+
+    <!-- ============================================================ -->
+    <section id="sec-1">
+      <h2>1. この冊子の位置づけ：「正解」ではなく「見取り図」</h2>
+      <p>
+        <a href="../02-manual/index.html">第2冊：ツールの基本説明書</a>では、各窓口の役割やボタン操作を中心にツールの使い方を紹介しました。一方で、実際に画面を開いてみると「なぜ他家の手牌をわざわざ <code>?</code> で伏せるのか」「なぜAIの推奨を1択の答えとして押し付けず、数値と理由を分けて並べるのか」と疑問に感じる部分もあるかもしれません。
+      </p>
+      <p>
+        この冊子では、そうした画面設計の裏にある考え方を解説します。ここで述べるのは、特定の戦術論や「こう打つのが唯一の正解だ」という答えの押し付けではありません。<strong>一人の打ち手（一者視点）が卓上で頭の中を整理するための「牌理の仮説（見取り図）」</strong>として、本ツールの各機能が何を補助するために作られているのかを1対1で対応づけて説明します。
+      </p>
+
+      <div class="callout">
+        <p class="callout-title">この冊子の読み方</p>
+        <p>
+          「麻雀の打ち方を教える教科書」ではなく、<strong>「自分の思考を整理するときに、ツールのどの表示をどう頼ればよいか」</strong>の対応図としてお読みください。自分なりの方針や美意識と照らし合わせながら使うことで、画面の数値が実戦の感覚に結びつきやすくなります。
+        </p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-2">
+      <h2>2. 脳内整理の土台：3つの領域と2つの目的</h2>
+      <p>
+        実戦の卓上で1人の打ち手が処理している情報は膨大ですが、頭の中を整理する土台としては、<strong>「3つの領域」</strong>から情報を集め、<strong>「2つの目的」</strong>に集約する構造として捉えると見通しが良くなります。
+      </p>
+
+      <h3>3つの領域</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>領域</th>
+              <th>扱う対象と視点</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="col-nowrap"><strong>① 自手の牌理</strong></td>
+              <td>自分の手牌14枚（副露を含む）の手組・手役・待ち・向聴数・受入枚数など、自分のアガリを組み立てる領域です。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>② 捨て牌読みの牌理</strong></td>
+              <td>他家の河に並んだ捨て牌の順番、手出し・ツモ切りの違い、副露の内容やタイミングから、相手の進行度や危険牌を推察する領域です。</td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>③ 場・山読みの牌理</strong></td>
+              <td>卓全体に見えている牌の偏り（壁・ドラ・枚数切れ）、残りの巡目、4家の点棒状況や局の進行から、山や局全体の動きを見積もる領域です。</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>2つの目的</h3>
+      <div class="info-grid">
+        <div class="info-box">
+          <h4>目的1：和了可能性の把握</h4>
+          <p>
+            自分の手がアガリに届く見込みがどれくらいあるか、最速で進めるべきか打点や手役を追うべきか、待ちや残り枚数が実戦的に足りているかを見極めます。
+          </p>
+        </div>
+        <div class="info-box">
+          <h4>目的2：相手の危険性の把握</h4>
+          <p>
+            他家がすでにテンパイまたはそれに近い状態か、どの色・どの牌が危険か、放銃のリスクを負って押す価値がある局面かを見極めます。
+          </p>
+        </div>
+      </div>
+      <p>
+        卓上のあらゆる選択は、①〜③の3領域から拾い上げた材料をもとに、「和了可能性」と「相手の危険性」のバランスを取る作業だと言えます。
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-3">
+      <h2>3. 機能と「牌理の仮説」の対応表（4機能）</h2>
+      <p>
+        本ツールの主要機能は、上記の3領域・2目的を整理するための4つの「牌理の仮説」にそれぞれ対応しています。まずは全体像を一覧表で確認し、続けて1つずつ掘り下げます。
+      </p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>対応する機能</th>
+              <th>背後にある「牌理の仮説」</th>
+              <th class="col-center">対応版</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>3-1. <code>?</code> マスキング ＆「見かけ残り vs 実山」の二段表示</strong></td>
+              <td>情報の「確定性」には濃淡があり、自手を中心に同心円状に霧が濃くなり巡目や副露とともに変化する。</td>
+              <td class="col-center"><span class="tag-free">FREE</span> <span class="tag-full">FULL</span></td>
+            </tr>
+            <tr>
+              <td><strong>3-2. 静的解析（目）と、AI打牌・LLM思考（頭脳）の分離表示</strong></td>
+              <td>「計算できる範囲」と「計算が追いつかない範囲」を分けて扱い、計算資源が追いつかない領域は不足度合いに応じて方針や枝刈りで考える。</td>
+              <td class="col-center"><span class="tag-free">FREE</span> <span class="tag-full">FULL</span><br><span class="note-text">（LLM連携はFULL）</span></td>
+            </tr>
+            <tr>
+              <td><strong>3-3. 全28役の複合向聴数 ＆ 向聴差（ΔS）表示</strong></td>
+              <td>判断の個性は近い1向聴より、遠い3〜4向聴からの変化幅に現れる。</td>
+              <td class="col-center"><span class="tag-free">FREE</span> <span class="tag-full">FULL</span></td>
+            </tr>
+            <tr>
+              <td><strong>3-4. 一局IF反復（別ツモで打ち直す）</strong></td>
+              <td>1回だけの実戦結果（N=1）から離れないと判断の良し悪しは測れない。</td>
+              <td class="col-center"><span class="tag-full">FULL</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- 3-1 -->
+      <h3>3-1. <code>?</code> マスキング ＆「見かけ残り vs 実山」の二段表示 <span class="tag-free">FREE</span> <span class="tag-full">FULL</span></h3>
+      <div class="callout callout-navy">
+        <p class="callout-title">牌理の仮説：情報の確定性には濃淡がある</p>
+        <p>
+          実戦の一者視点では、すべての情報が等しく見えているわけではありません。情報の確定性は、<strong>自手を中心に同心円状に霧が濃くなり、巡目や副露とともに刻々と変化</strong>していきます。
+        </p>
+      </div>
+      <ul>
+        <li><strong>確定性が最も濃い層（確定情報）</strong>：自分の手牌、4家の河（捨て牌）、晒された副露、ドラ表示牌。</li>
+        <li><strong>中間層（状況から推察する層）</strong>：捨て牌の順番、手出し・ツモ切りの別、副露のタイミング。</li>
+        <li><strong>霧が濃い層（非公開情報）</strong>：他家の手牌の中身、残りの山、王牌。</li>
+      </ul>
+      <p>
+        対局後に神視点（他家手牌がすべて見えている状態）だけで振り返ると、「実は山に1枚もなかった」「相手はすでに張っていた」という実戦では知り得なかった情報が混ざり、判断の基準が歪んでしまいます。本ツールでは、この境界を崩さないために以下の3つの補助を備えています。
+      </p>
+      <ul>
+        <li>
+          <strong>透視遮断と <code>?</code> マスキング</strong>：不完全情報局面では見えない他家手牌を <code>?</code> としてそのまま扱い、さらに検討のために他家手牌をオープン表示しているときであっても、<strong>静的解析の計算自体は公開情報のみで行う（透視遮断）</strong>設計です<span class="note-text">（※オープンリーチ宣言中の確定牌など、ルール上公開されている牌を除く）</span>。
+        </li>
+        <li>
+          <strong>「見かけ残り vs 実山・他家保持」の二段表示</strong>：他家オープン確認時にも、一者視点の数値と神視点の内訳を混ぜずに <code>見かけ残り: X枚（実山: Y枚／他家保持: Z枚）</code> の二段で並べて表示します。「実戦視点では X 枚残っているように見えた（判断の根拠）が、実際の山は Y 枚で他家が Z 枚持っていた（結果の裏側）」を明確に切り分けられます。
+        </li>
+        <li>
+          <strong>河のツモ切り3値化（<code>手出し／ツモ切り／不明(unknown)</code>）</strong>：手出し・ツモ切りの情報が記録されていない牌譜や外部メモから読み込んだ局面では、勝手にツモ切りや手出しと決めつけず <code>不明(unknown)</code> として保持します。確定していない情報を確定したように見せないための防護です。
+        </li>
+      </ul>
+
+      <!-- 3-2 -->
+      <h3>3-2. 静的解析（目）と、AI打牌・LLM思考（頭脳）の分離表示 <span class="tag-free">FREE</span> <span class="tag-full">FULL</span></h3>
+      <div class="callout callout-navy">
+        <p class="callout-title">牌理の仮説：「計算できる範囲」と「計算が追いつかない範囲」を分けて扱う</p>
+        <p>
+          卓上の判断には、ルールと枚数から厳密に数え切れる領域と、他家の意図や将来のツモまで絡んで計算資源が追いつかない領域が混在しています。<strong>計算できる範囲は正確に押さえ、計算が追いつかない領域は不足度合いに応じて方針や枝刈りで考える</strong>ことで、思考の混乱を防ぎます。
+        </p>
+      </div>
+      <ul>
+        <li>
+          <strong>機械の「目」（静的解析パネル：<span class="tag-free">FREE</span> <span class="tag-full">FULL</span> 共通）</strong>：向聴数、受入の種類と枚数、見え切り・空聴の警告、3色ハイライト、日本語理由バッジ、押し引きメーター、守備安全度といった「136枚から決定論的に数えられる事実」をリアルタイムに提示します。人間が卓上でやりがちな数え間違いや見落としを機械の「目」に任せることで、脳のメモリを方針判断のために空ける役割です。
+        </li>
+        <li>
+          <strong>人間やAIの「頭脳」（内蔵線形AI・外部LLM連携 <span class="tag-full">FULL</span>）</strong>：数値だけでは決め切れない押し引きの方針・他家の進行読み・局面全体のストーリーは「頭脳」の領域です。本ツールでは、外部LLM連携（Mode 2 等）でも他家読み（<code>opponentRead</code>）と打牌理由（<code>reason</code>）を分離して出力させ、「何を根拠にそう読んだか」「その上でなぜこの牌を選んだか」を自分の思考と突き合わせやすい形で並べます。
+        </li>
+      </ul>
+
+      <!-- 3-3 -->
+      <h3>3-3. 全28役の複合向聴数 ＆ 向聴差（ΔS）表示 <span class="tag-free">FREE</span> <span class="tag-full">FULL</span></h3>
+      <div class="callout callout-navy">
+        <p class="callout-title">牌理の仮説：判断の個性は、遠い3〜4向聴からの変化幅に現れる</p>
+        <p>
+          テンパイ目前の1向聴では、受入枚数や待ちの良さから候補が自然に絞られる局面が多くなります。むしろ打ち手の個性や大局観が強く現れるのは、<strong>遠い3〜4向聴からどの方向へ舵を切るか</strong>という変化幅です。
+        </p>
+      </div>
+      <p>
+        たとえば、最速で和了へ向かうルートを選ぶのか、1〜2手遠回りして高打点の手役（混一色・三色同順・一気通貫・チャンタ系など）を狙うのか、あるいは満貫見込みの早い仕掛けで局の主導権を握りに行くのか――こうした分岐は「最短の向聴数だけ」を見ていては見落としがちです。
+      </p>
+      <ul>
+        <li>
+          <strong>最速ルート（<code>ΔS = 0</code>）と遠回りルート（<code>ΔS = +1, +2</code>）の併記</strong>：全28役について複合向聴数を算出し、最速の進行（<code>ΔS = 0</code>）だけでなく、1〜2手遠回りすれば射程に入る手役（<code>ΔS = +1</code>, <code>ΔS = +2</code>）を一覧で可視化します。
+        </li>
+        <li>
+          <strong>3色ハイライトの併記</strong>：打牌候補ごとに速度・受入や手役方向性の違いを色分けで併記することで、「最速を優先した場合」と「打点や手役へ寄せた場合」のトレードオフを一目で比較できます。
+        </li>
+      </ul>
+
+      <!-- 3-4 -->
+      <h3>3-4. 一局IF反復（別ツモで打ち直す） <span class="tag-full">FULL</span></h3>
+      <div class="callout callout-navy">
+        <p class="callout-title">牌理の仮説：1回だけの実戦結果（N=1）から離れないと判断の良し悪しは測れない</p>
+        <p>
+          麻雀は不完全情報かつ運の振れ幅が大きいゲームです。正しい選択をしても裏目を引いて放銃することはあり、逆に無理な選択がたまたま一発ツモで実ることもあります。1回限りの結果（<code>N=1</code>）をそのまま判断の良し悪しに直結させると、学習が結果論に引っ張られてしまいます。
+        </p>
+      </div>
+      <ul>
+        <li>
+          <strong>確定前提を固定した周回スパーリング</strong>：一局IF反復（<span class="ui-label">🎲 別ツモで打ち直す（IF）</span>）では、自分の手牌・すでに並んだ河・点棒状況といった<strong>確定している前提を固定</strong>したまま、見えない他家の手牌と残りの山だけを<strong>136枚の物理保存則を守って組み直し</strong>、同じ局面を何度でも打ち直せます。
+        </li>
+        <li>
+          <strong>「運のブレ」と「構造の強さ」を切り分ける道場</strong>：別のツモ山で複数回まわしてみることで、「さっきの裏目はたまたまだったのか」「そもそも手組や押し引きに無理があったのか」を、他人の答えではなく自分の体験として確かめることができます。
+        </li>
+      </ul>
+    </section>
+
+    <!-- ============================================================ -->
+    <section id="sec-4">
+      <h2>4. まとめ：ツールを「答え合わせ機」ではなく「道場」として使う</h2>
+      <p>
+        ここまで見てきた4つの機能は、すべて「ツールが1つの正解を宣告して終わり」にするためではなく、<strong>打ち手自身の脳内整理を鍛えるための往復運動</strong>を支えるように設計されています。実戦の検討や練習では、次の3ステップを往復する使い方がおすすめです。
+      </p>
+
+      <ol class="step-list">
+        <li>
+          <strong>自頭で3領域から仮説を立てる</strong><br>
+          まずは解析数値を見る前に、①自手の牌理・②捨て牌読み・③場と山読みの3領域から「今どれくらいアガれそうか」「誰がどれくらい危険か」「自分なら何を切るか」の仮説を自分の言葉で立てます。
+        </li>
+        <li>
+          <strong>静的解析（目）で数え漏れ・見え切りを確認する</strong><br>
+          次に静的解析パネルを見て、向聴数・受入枚数・見かけ残り枚数・見え切り警告・<code>ΔS</code> の手役候補に数え漏れや見落としがなかったかを点検します。
+        </li>
+        <li>
+          <strong>一局IF反復や外部LLM（頭脳）と突き合わせる</strong><br>
+          迷った局面や結果にモヤモヤが残った局は、<span class="ui-label">🔁 同山</span> や <span class="ui-label">🎲 別ツモで打ち直す（IF）</span> <span class="tag-full">FULL</span> で別展開を体感したり、外部LLM連携や解説プロンプト（頭脳）の視点と比較したりして、自分の判断軸を言語化・更新していきます。
+        </li>
+      </ol>
+
+      <p>
+        次の <a href="../04-lab/index.html">第4冊：実験室・技術資料</a> では、こうした設計に至った背景コラム（牌理以前／牌理以後のアプローチ変遷）に加え、人間思考×AI思考を往復させる具体的なスパーリング手順、すぐコピーして使える実務プロンプト集、データ規格（Spec v1.2）およびデータ分類・利用マナーをまとめています。
+      </p>
+
+      <div class="cta-row">
+        <a class="btn btn-primary" href="../app/free.html" target="_blank" rel="noopener">▶ 無料Web版をひらく</a>
+        <a class="btn btn-secondary" href="../04-lab/index.html">第4冊：実験室・技術資料へ進む</a>
+      </div>
+    </section>
+
+    <nav class="pager" aria-label="前後の冊子">
+      <a class="pager-link" href="../02-manual/index.html">
+        <span class="pager-dir">← 前の冊子へ</span>
+        <span class="pager-title">第2冊：ツールの基本説明書</span>
+      </a>
+      <a class="pager-link pager-next" href="../04-lab/index.html">
+        <span class="pager-dir">次の冊子へ →</span>
+        <span class="pager-title">第4冊：実験室・技術資料</span>
+      </a>
+    </nav>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-credit">制作・著作：東雲研究所 チームサカモト / 東雲六字（しののめ むつき / Shinonome Mutsuki）</p>
+      <p class="footer-links">
+        <a href="../index.html">トップ</a>
+        <a href="../00-intro/index.html">0.はじめて</a>
+        <a href="../01-primer/index.html">1.助走</a>
+        <a href="../02-manual/index.html">2.説明書</a>
+        <a href="../03-thinking/index.html">3.脳内整理</a>
+        <a href="../04-lab/index.html">4.実験室</a>
+        <a href="../app/free.html" target="_blank" rel="noopener">無料Web版をひらく</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
