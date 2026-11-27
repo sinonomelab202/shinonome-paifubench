@@ -100,7 +100,7 @@
             </tr>
             <tr>
               <td class="col-nowrap"><strong>東風戦／半荘戦</strong></td>
-              <td>複数局を通した点棒推移・オーラス条件戦の対局練習。</td>
+              <td>複数局を通した点棒推移・オーラス条件戦の対局練習。各局の1打イベントリプレイや同山／IF分岐への展開にも対応。</td>
               <td class="col-center"><span class="mark-no">×</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
@@ -112,13 +112,13 @@
             </tr>
             <tr>
               <td class="col-nowrap"><strong>静的解析一式（基本＆深層）</strong></td>
-              <td>全28役複合向聴数、狙い目手役 ΔS、受入上位、3色ハイライト、日本語理由バッジ、押し引きメーター、守備安全度、他家オープン時の「見かけ残り vs 実山・他家保持」二段分離表示。</td>
+              <td>全28役複合向聴数、狙い目手役 ΔS、受入上位、3色ハイライト、日本語理由バッジ、押し引きメーター、守備安全度、他家オープン時の「見かけ残り vs 実山・他家保持」二段分離表示、場の確定度／視点開示度指標（未公開枚数・残エントロピー等）の計測表示。</td>
               <td class="col-center"><span class="mark-yes">○</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
             <tr>
-              <td class="col-nowrap"><strong>単純リプレイ</strong></td>
-              <td><span class="ui-label">⏮ 先頭</span> / <span class="ui-label">↩ 戻す</span> / <span class="ui-label">▶ 再生</span> / <span class="ui-label">↪ 1手進む</span> / <span class="ui-label">⏭ 最新</span>、自動再生、任意巡目からの分岐打ち直し。ショートカット（<kbd>←</kbd> / <kbd>→</kbd> / <kbd>Z</kbd> / <kbd>Shift</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>・<kbd>Cmd</kbd>+<kbd>Y</kbd>）対応。</td>
+              <td class="col-nowrap"><strong>1打イベントリプレイ</strong></td>
+              <td>単局および東風／半荘各局の1打単位リプレイ。<span class="ui-label">⏮ 先頭</span> / <span class="ui-label">↩ 戻す</span> / <span class="ui-label">▶ 再生</span> / <span class="ui-label">↪ 1手進む</span> / <span class="ui-label">⏭ 最新</span>、<strong>1打／自家巡目の粒度切替</strong>、シークスライダー、自動再生、任意時点からの同山／IF分岐打ち直し<span class="note-text">（※東風・半荘の各局リプレイおよびIF分岐は FULL）</span>。ショートカット（<kbd>←</kbd> / <kbd>→</kbd> / <kbd>Z</kbd> / <kbd>Shift</kbd>+<kbd>Z</kbd> / <kbd>Ctrl</kbd>+<kbd>Y</kbd>・<kbd>Cmd</kbd>+<kbd>Y</kbd>）対応。</td>
               <td class="col-center"><span class="mark-yes">○</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
@@ -130,7 +130,13 @@
             </tr>
             <tr>
               <td class="col-nowrap"><strong>視認・手触り設定（🎨 表示・音）</strong></td>
-              <td>同種牌ハイライト、点数⇔点差ワンクリック切替、河のツモ切り3値表示、他家打牌リズム、卓色8種・牌面デザイン4種・牌背色4種・文字サイズ・手牌表示・画面型・自動理牌・自動ツモテンポ。</td>
+              <td>リプレイバー直下・河直上に卓上ユーティリティ群（鳴き介入・他家手牌・<strong>何切るアシスト ON/OFF</strong>・表示/音）を集約し、ドラ表示牌も河直上に配置。同種牌ハイライト、点数⇔点差ワンクリック切替、河のツモ切り3値表示、他家打牌リズム、卓色8種・牌面デザイン4種・牌背色4種・文字サイズ・手牌表示・画面型・自動理牌・自動ツモテンポに対応。</td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+              <td class="col-center"><span class="mark-yes">○</span></td>
+            </tr>
+            <tr>
+              <td class="col-nowrap"><strong>卓集中モード（<span class="ui-label">⛶ 集中</span>）</strong></td>
+              <td>ヘッダー・セットアップバー・フッター・下部タブを一括非表示にし、画面サイズに応じた自動フィットで卓へ集中。右上フローティングバーまたは <kbd>Esc</kbd> で即解除でき、PC では解析パネルのサブトグル切替にも対応。</td>
               <td class="col-center"><span class="mark-yes">○</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
@@ -159,7 +165,7 @@
             </tr>
             <tr>
               <td class="col-nowrap"><strong>不完全情報局面の作成・編集</strong></td>
-              <td>他家手牌が未確定な局面をそのまま作成・編集。<br><span class="note-text">※テキスト読込・自動補充再生自体は FREE でも動作。</span></td>
+              <td>他家手牌が未確定な局面をそのまま作成・編集。編集中の場の確定度／視点開示度指標（未公開枚数・残エントロピー等）もリアルタイム計測。<br><span class="note-text">※テキスト読込・自動補充再生自体は FREE でも動作。</span></td>
               <td class="col-center"><span class="mark-no">×</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
@@ -194,13 +200,13 @@
             </tr>
             <tr>
               <td class="col-nowrap"><strong>ローカル保存庫</strong></td>
-              <td>タブ <span class="ui-label">📚 保存済み牌譜（開く・保存）</span> → <span class="ui-label">💾 検閲して保存</span>、およびオートセーブ復元。</td>
+              <td>保存済み一覧を主役にしたUIとワンクリック保存バー（詳細入力・JSON入出力は折りたたみ格納）。<strong>系譜管理</strong>（原局・同山分岐・IF・編集分岐）、<strong>半荘パック保存</strong>、場の確定度／視点開示度指標の記録表示、およびオートセーブ復元に対応。</td>
               <td class="col-center"><span class="mark-no">×</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
             <tr>
               <td class="col-nowrap"><strong>JSONバックアップ</strong></td>
-              <td>ローカル保存庫データの一括エクスポート／インポート。<span class="note-text">（※実機最終点検中）</span></td>
+              <td>ローカル保存庫データの一括エクスポート／インポート（保存庫内JSON折りたたみパネルから実行）。</td>
               <td class="col-center"><span class="mark-no">×</span></td>
               <td class="col-center"><span class="mark-yes">○</span></td>
             </tr>
@@ -295,9 +301,9 @@
               <td class="col-center"><span class="tag-full">FULL</span></td>
             </tr>
             <tr>
-              <td><span class="ui-label">📚 保存済み牌譜（開く・保存）</span> → <span class="ui-label">💾 検閲して保存</span></td>
+              <td><span class="ui-label">📚 保存済み牌譜（開く・保存）</span> → ワンクリック保存バー<br><span class="note-text">（詳細入力・JSON入出力は折りたたみ）</span></td>
               <td><span class="ui-label">📂 牌譜・保存</span></td>
-              <td>現在の牌譜や局面をブラウザ内のローカル保存庫へ明示的に記録します。後日もう一度振り返りたい局を手元にストックするときに使います。</td>
+              <td>一覧主役のローカル保存庫へ、現在の単局や半荘パックをブラウザ内へ明示的に記録します。原局・同山分岐・IF・編集分岐の系譜ごと管理して後日振り返りたいときに使います。</td>
               <td class="col-center"><span class="tag-full">FULL</span></td>
             </tr>
           </tbody>
@@ -320,7 +326,7 @@
           <strong>テキストコード（Spec v1.2）</strong>：<strong>1局＝1行の <code>|</code> 区切り形式</strong> です。人間の目で中身を確認・手直ししやすく、AIとのやり取りや、複数局をまとめた <code>.txt</code> ファイルのバッチ読込（FULL）に適しています。
         </li>
         <li>
-          <strong>JSONファイル（FULL）</strong>：ローカル保存庫に蓄積した複数局のデータをまとめてバックアップしたり、別端末へ丸ごと移行したりするための形式です（※実機最終点検中）。
+          <strong>JSONファイル（FULL）</strong>：ローカル保存庫に蓄積した複数局のデータをまとめてバックアップしたり、別端末へ丸ごと移行したりするための形式です。
         </li>
       </ul>
 
